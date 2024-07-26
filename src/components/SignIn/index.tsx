@@ -1,4 +1,4 @@
-import useFirebase from '@/Hooks/firebase';
+import { UseFirebase } from '@/Hooks/firebase';
 import { Button, Input2, TypographyComp } from '@dashflowx/core';
 import { signInWithPopup } from 'firebase/auth';
 import { FcGoogle } from 'react-icons/fc';
@@ -31,7 +31,7 @@ const SignIn = ({
   handleSignOn,
   handleSignOnError,
 }: any) => {
-  const { auth, provider }: any = useFirebase(firebaseConfig || null);
+  const { auth, provider }: any = UseFirebase(firebaseConfig || null);
   const {
     register,
     handleSubmit,
@@ -218,4 +218,4 @@ const SignIn = ({
   );
 };
 
-export default SignIn;
+export  {SignIn};
