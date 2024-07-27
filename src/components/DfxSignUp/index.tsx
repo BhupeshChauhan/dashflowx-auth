@@ -19,7 +19,7 @@ const loginSchema = z.object({
 interface iDfxSignUp {
   library: 'react' | 'next';
   type: any;
-  redirectSignupUrl: string;
+  redirectSignInUrl: string;
   previewImg: string;
   previewTitle: string;
   PreviewDescription: string;
@@ -40,7 +40,7 @@ interface iDfxSignUp {
 const DfxSignUp = ({
   library,
   type,
-  redirectSignupUrl,
+  redirectSignInUrl,
   previewImg,
   previewTitle,
   PreviewDescription,
@@ -99,7 +99,7 @@ const DfxSignUp = ({
         isLoading={isLoading}
         library={library}
         type={type}
-        redirectSignupUrl={redirectSignupUrl}
+        redirectSignInUrl={redirectSignInUrl}
         PreviewDescription={PreviewDescription}
         previewTitle={previewTitle}
         previewImg={previewImg}

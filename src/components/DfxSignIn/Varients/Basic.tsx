@@ -154,7 +154,7 @@ const BasicSignIn = ({
                     to={redirectSignupUrl}
                     className="underline-offset-4 font-semibold text-primary underline"
                   >
-                    Sign up
+                    Sign Up
                   </TypographyComp>
                 )}
                 {library === 'next' && (
@@ -163,7 +163,7 @@ const BasicSignIn = ({
                     href={redirectSignupUrl}
                     className="underline-offset-4 font-semibold text-primary underline"
                   >
-                    Sign up
+                    Sign Up
                   </TypographyComp>
                 )}
               </p>

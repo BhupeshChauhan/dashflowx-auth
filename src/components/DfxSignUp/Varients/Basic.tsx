@@ -5,7 +5,7 @@ import { FcGoogle } from 'react-icons/fc';
 interface iBasicSignUp {
   library: 'react' | 'next';
   type: any;
-  redirectSignupUrl: string;
+  redirectSignInUrl: string;
   previewImg: string;
   previewTitle: string;
   PreviewDescription: string;
@@ -30,7 +30,7 @@ const BasicSignUp = ({
   isLoading,
   library,
   type,
-  redirectSignupUrl,
+  redirectSignInUrl,
   PreviewDescription,
   previewTitle,
   previewImg,
@@ -120,7 +120,7 @@ const BasicSignUp = ({
                 {library === 'react' && (
                   <TypographyComp
                     as={type}
-                    to={redirectSignupUrl}
+                    to={redirectSignInUrl}
                     className="underline-offset-4 font-semibold text-primary underline"
                   >
                     Sign In
@@ -129,7 +129,7 @@ const BasicSignUp = ({
                 {library === 'next' && (
                   <TypographyComp
                     as={type}
-                    href={redirectSignupUrl}
+                    href={redirectSignInUrl}
                     className="underline-offset-4 font-semibold text-primary underline"
                   >
                     Sign In
