@@ -18,18 +18,18 @@ const loginSchema = z.object({
 });
 
 interface iDfxSignIn {
-  library: 'react' | 'next'
-  type: any,
-  forgetPasswordUrl: string,
-  redirectSignupUrl: string,
-  previewImg: string,
-  previewTitle: string,
-  PreviewDescription: string,
-  firebaseConfig: ifirebaseConfig | null,
-  handleSignIn: (data: { email: string; password: string }) => void,
-  isLoading: boolean,
-  handleSignOn: (data: any) => void,
-  handleSignOnError: (error: any) => void,
+  library: 'react' | 'next';
+  type: any;
+  forgetPasswordUrl: string;
+  redirectSignupUrl: string;
+  previewImg: string;
+  previewTitle: string;
+  PreviewDescription: string;
+  firebaseConfig?: ifirebaseConfig | null;
+  handleSignIn: (data: { email: string; password: string }) => void;
+  isLoading?: boolean;
+  handleSignOn?: (data: any) => void;
+  handleSignOnError?: (error: any) => void;
 }
 
 const DfxSignIn = ({
@@ -67,11 +67,11 @@ const DfxSignIn = ({
       signInWithPopup(auth, provider)
         .then((result) => {
           console.log('Successfully signed in!', result);
-          handleSignOn(result);
+          handleSignOn && handleSignOn(result);
         })
         .catch((error) => {
           console.error('Error signing in!', error);
-          handleSignOnError(error);
+          handleSignOnError && handleSignOnError(error);
         });
     }
   };
@@ -110,36 +110,26 @@ const DfxSignIn = ({
             onSubmit={handleSubmit(handleSubmitForm)}
           >
             <div className="flex flex-col pt-4">
-              <div className="focus-within:border-b-gray-500 relative flex overflow-hidden border-b-2 transition">
-                <input
-                  type="email"
-                  id="login-email"
-                  className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
-                  placeholder="Email"
-                />
-                <Input2
-                  type="email"
-                  id="login-email"
-                  className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
-                  placeholder="Email"
-                  fullwidth={true}
-                  {...register('email', { required: true })}
-                  errorMsg={errors.email?.message}
-                />
-              </div>
+              <Input2
+                type="email"
+                id="login-email"
+                className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
+                placeholder="Email"
+                fullwidth={true}
+                {...register('email', { required: true })}
+                errorMsg={errors.email?.message}
+              />
             </div>
             <div className="mb-12 flex flex-col pt-4">
-              <div className="focus-within:border-b-gray-500 relative flex overflow-hidden border-b-2 transition">
-                <Input2
-                  type="password"
-                  id="login-password"
-                  className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
-                  placeholder="Password"
-                  fullwidth={true}
-                  {...register('password', { required: true })}
-                  errorMsg={errors.password?.message}
-                />
-              </div>
+              <Input2
+                type="password"
+                id="login-password"
+                className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
+                placeholder="Password"
+                fullwidth={true}
+                {...register('password', { required: true })}
+                errorMsg={errors.password?.message}
+              />
             </div>
             <Button
               variant="solid"
@@ -233,4 +223,4 @@ const DfxSignIn = ({
   );
 };
 
-export  {DfxSignIn};
+export { DfxSignIn };
