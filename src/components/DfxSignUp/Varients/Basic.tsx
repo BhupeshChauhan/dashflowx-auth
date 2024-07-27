@@ -74,7 +74,7 @@ const BasicSignUp = ({
                 type="username"
                 id="login-username"
                 className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
-                placeholder="username"
+                placeholder="Username"
                 fullwidth={true}
                 {...register('username', { required: true })}
                 errorMsg={errors.username?.message}
@@ -102,14 +102,6 @@ const BasicSignUp = ({
                 errorMsg={errors.password?.message}
               />
             </div>
-            <Button
-              variant="solid"
-              color="primary"
-              type="submit"
-              className="w-full rounded-lg px-4 py-2 text-center text-base font-semibold shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2"
-            >
-              Sign Up
-            </Button>
             <Button
               variant="solid"
               color="primary"
