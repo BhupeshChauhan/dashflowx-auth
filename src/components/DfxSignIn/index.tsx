@@ -31,6 +31,7 @@ interface iDfxSignIn {
   handleSignOnError?: (error: any) => void;
   logoUrl: string;
   varient: 'basic';
+  showSignUp?: boolean;
 }
 
 const DfxSignIn = ({
@@ -48,6 +49,7 @@ const DfxSignIn = ({
   handleSignOnError,
   logoUrl,
   varient = 'basic',
+  showSignUp = true
 }: iDfxSignIn) => {
   const { auth, provider }: any = UseFirebase(firebaseConfig || null);
   const {
@@ -95,6 +97,7 @@ const DfxSignIn = ({
         PreviewDescription={PreviewDescription}
         previewTitle={previewTitle}
         previewImg={previewImg}
+        showSignUp={showSignUp}
       />
     );
   }

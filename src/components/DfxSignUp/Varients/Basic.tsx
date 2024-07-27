@@ -2,10 +2,9 @@ import { ifirebaseConfig } from '@/Hooks/firebase';
 import { Button, Input2, TypographyComp } from '@dashflowx/core';
 import { FcGoogle } from 'react-icons/fc';
 
-interface iBasicSignIn {
+interface iBasicSignUp {
   library: 'react' | 'next';
   type: any;
-  forgetPasswordUrl: string;
   redirectSignupUrl: string;
   previewImg: string;
   previewTitle: string;
@@ -18,9 +17,9 @@ interface iBasicSignIn {
   handleSubmitOn: (type: string) => void;
   handleSubmit: any;
   handleSubmitForm: (data: any) => void;
-  showSignUp: boolean
+  showSignIn: boolean;
 }
-const BasicSignIn = ({
+const BasicSignUp = ({
   logoUrl,
   firebaseConfig,
   handleSubmitOn,
@@ -31,13 +30,12 @@ const BasicSignIn = ({
   isLoading,
   library,
   type,
-  forgetPasswordUrl,
   redirectSignupUrl,
   PreviewDescription,
   previewTitle,
   previewImg,
-  showSignUp
-}: iBasicSignIn) => {
+  showSignIn,
+}: iBasicSignUp) => {
   return (
     <div className="flex flex-wrap">
       <div className="flex w-full flex-col md:w-[40%]">
@@ -73,6 +71,17 @@ const BasicSignIn = ({
           >
             <div className="flex flex-col pt-4">
               <Input2
+                type="username"
+                id="login-username"
+                className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
+                placeholder="username"
+                fullwidth={true}
+                {...register('username', { required: true })}
+                errorMsg={errors.username?.message}
+              />
+            </div>
+            <div className="flex flex-col pt-4">
+              <Input2
                 type="email"
                 id="login-email"
                 className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
@@ -98,63 +107,31 @@ const BasicSignIn = ({
               color="primary"
               type="submit"
               className="w-full rounded-lg px-4 py-2 text-center text-base font-semibold shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2"
+            >
+              Sign Up
+            </Button>
+            <Button
+              variant="solid"
+              color="primary"
+              type="submit"
+              className="w-full rounded-lg px-4 py-2 text-center text-base font-semibold shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2"
               fullwidth={true}
               disabled={isLoading}
             >
-              Sign in
+              Sign Up
             </Button>
           </form>
-          <div className="flex items-center justify-between my-6">
-            <div className="flex items-start">
-              <div className="flex h-5 items-center">
-                <input
-                  id="remember"
-                  aria-describedby="remember"
-                  type="checkbox"
-                  className="focus:ring-3 focus:ring-primary-300 dark:focus:ring-primary-600 h-4 w-4 rounded border border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
-                />
-              </div>
-              <div className="ml-3 text-sm">
-                <label
-                  htmlFor="remember"
-                  className="text-gray-500 dark:text-gray-300"
-                >
-                  Remember me
-                </label>
-              </div>
-            </div>
-            <div>
-            {library === 'react' && (
-              <TypographyComp
-                as={type}
-                to={forgetPasswordUrl}
-                className="text-primary-600 text-sm dark:text-primary-500 font-thin hover:underline"
-              >
-                Forget Password?
-              </TypographyComp>
-            )}
-            {library === 'next' && (
-              <TypographyComp
-                as={type}
-                href={forgetPasswordUrl}
-                className="text-primary-600 text-sm dark:text-primary-500 font-thin hover:underline"
-              >
-                Forget Password?
-              </TypographyComp>
-            )}
-            </div>
-          </div>
-          {showSignUp && (
+          {showSignIn && (
             <div className="py-12 text-center">
               <p className="whitespace-nowrap text-gray-600">
-                Don't have an account?{' '}
+                Already have an account?{' '}
                 {library === 'react' && (
                   <TypographyComp
                     as={type}
                     to={redirectSignupUrl}
                     className="underline-offset-4 font-semibold text-primary underline"
                   >
-                    Sign up
+                    Sign In
                   </TypographyComp>
                 )}
                 {library === 'next' && (
@@ -163,7 +140,7 @@ const BasicSignIn = ({
                     href={redirectSignupUrl}
                     className="underline-offset-4 font-semibold text-primary underline"
                   >
-                    Sign up
+                    Sign In
                   </TypographyComp>
                 )}
               </p>
@@ -187,4 +164,4 @@ const BasicSignIn = ({
   );
 };
 
-export default BasicSignIn;
+export default BasicSignUp;
