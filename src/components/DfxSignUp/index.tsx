@@ -24,7 +24,7 @@ interface iDfxSignUp {
   previewTitle: string;
   PreviewDescription: string;
   firebaseConfig?: ifirebaseConfig | null;
-  handleSignIn: (data: {
+  handleSignUp: (data: {
     username: string;
     email: string;
     password: string;
@@ -45,7 +45,7 @@ const DfxSignUp = ({
   previewTitle,
   PreviewDescription,
   firebaseConfig,
-  handleSignIn,
+  handleSignUp,
   isLoading,
   handleSignOn,
   handleSignOnError,
@@ -67,7 +67,7 @@ const DfxSignUp = ({
     resolver: zodResolver(loginSchema),
   });
   const handleSubmitForm = (data: any) => {
-    handleSignIn({
+    handleSignUp({
       username: data.username,
       email: data.email,
       password: data.password,
