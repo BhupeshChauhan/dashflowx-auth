@@ -130,7 +130,7 @@ const BasicSignIn = ({
                 Forget Password?
               </TypographyComp>
             )}
-            {library === 'react' && (
+            {library === 'next' && (
               <TypographyComp
                 as={type}
                 href={forgetPasswordUrl}
@@ -153,7 +153,7 @@ const BasicSignIn = ({
                     Sign up
                   </TypographyComp>
                 )}
-                {library === 'react' && (
+                {library === 'next' && (
                   <TypographyComp
                     as={type}
                     href={redirectSignupUrl}
