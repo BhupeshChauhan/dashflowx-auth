@@ -121,6 +121,7 @@ const BasicSignIn = ({
                 </label>
               </div>
             </div>
+            <div>
             {library === 'react' && (
               <TypographyComp
                 as={type}
@@ -139,6 +140,7 @@ const BasicSignIn = ({
                 Forget Password?
               </TypographyComp>
             )}
+            </div>
           </div>
           {type !== 'user' && (
             <div className="py-12 text-center">
