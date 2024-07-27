@@ -1,4 +1,4 @@
-import { UseFirebase } from '@/Hooks/firebase';
+import { ifirebaseConfig, UseFirebase } from '@/Hooks/firebase';
 import { Button, Input2, TypographyComp } from '@dashflowx/core';
 import { signInWithPopup } from 'firebase/auth';
 import { FcGoogle } from 'react-icons/fc';
@@ -17,7 +17,22 @@ const loginSchema = z.object({
     .max(20, { message: 'Password must be less than 20 characters' }),
 });
 
-const SignIn = ({
+interface iDfxSignIn {
+  library: 'react' | 'next'
+  type: any,
+  forgetPasswordUrl: string,
+  redirectSignupUrl: string,
+  previewImg: string,
+  previewTitle: string,
+  PreviewDescription: string,
+  firebaseConfig: ifirebaseConfig | null,
+  handleSignIn: (data: { email: string; password: string }) => void,
+  isLoading: boolean,
+  handleSignOn: (data: any) => void,
+  handleSignOnError: (error: any) => void,
+}
+
+const DfxSignIn = ({
   library,
   type,
   forgetPasswordUrl,
@@ -30,7 +45,7 @@ const SignIn = ({
   isLoading,
   handleSignOn,
   handleSignOnError,
-}: any) => {
+}: iDfxSignIn) => {
   const { auth, provider }: any = UseFirebase(firebaseConfig || null);
   const {
     register,
@@ -218,4 +233,4 @@ const SignIn = ({
   );
 };
 
-export  {SignIn};
+export  {DfxSignIn};

@@ -1,7 +1,7 @@
-const SignUp = () => {
+const DfxSignUp = () => {
   return (
-    <div>SignUp</div>
+    <div>DfxSignUp</div>
   )
 }
 
-export  {SignUp}
+export  {DfxSignUp}
