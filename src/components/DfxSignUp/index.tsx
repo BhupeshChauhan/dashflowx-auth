@@ -6,6 +6,10 @@ import { useForm } from 'react-hook-form';
 import BasicSignup from './Varients/Basic';
 
 const loginSchema = z.object({
+  username: z
+    .string()
+    .min(1, { message: 'Please enter a valid password' })
+    .max(20, { message: 'Password must be less than 20 characters' }),
   email: z
     .string()
     .min(1, { message: 'Please enter a valid email' })
