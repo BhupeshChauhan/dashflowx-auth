@@ -8,8 +8,8 @@ import BasicSignup from './Varients/Basic';
 const loginSchema = z.object({
   username: z
     .string()
-    .min(1, { message: 'Please enter a valid password' })
-    .max(20, { message: 'Password must be less than 20 characters' }),
+    .min(1, { message: 'Please enter a valid Username' })
+    .max(20, { message: 'Username must be less than 20 characters' }),
   email: z
     .string()
     .min(1, { message: 'Please enter a valid email' })
@@ -71,6 +71,7 @@ const DfxSignUp = ({
     resolver: zodResolver(loginSchema),
   });
   const handleSubmitForm = (data: any) => {
+    console.log(data)
     handleSignUp({
       username: data.username,
       email: data.email,

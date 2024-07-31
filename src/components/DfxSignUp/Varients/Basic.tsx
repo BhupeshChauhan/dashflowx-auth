@@ -37,7 +37,7 @@ const BasicSignUp = ({
   showSignIn,
 }: iBasicSignUp) => {
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap w-screen h-screen">
       <div className="flex w-full flex-col md:w-[40%]">
         <div className="w-[80%] ml-12 my-auto flex flex-col pt-8 md:px-6 md:pt-0">
           <a
