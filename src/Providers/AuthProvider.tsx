@@ -14,7 +14,7 @@ import {
 } from 'firebase/auth';
 
 interface AuthContextType {
-  currentUser: string | null
+  currentUser: string | null;
   signInWithGoogle: () => any;
   login: (email: any, password: any) => any;
   signUp: (email: any, password: any) => any;
@@ -34,9 +34,9 @@ const AuthContext = createContext<AuthContextType>({
   resetPassword: () => Promise,
 });
 
-export const useAuth = () => useContext(AuthContext);
+const useAuth = () => useContext(AuthContext);
 
-const AuthProvider = ({ children, firebaseConfig, logInUrl }: any) => {
+const DfxAuthProvider = ({ children, firebaseConfig, logInUrl }: any) => {
   const { auth } = UseFirebase(firebaseConfig || null);
   const [currentUser, setCurrentUser] = useState<any>(null);
 
@@ -102,4 +102,4 @@ const AuthProvider = ({ children, firebaseConfig, logInUrl }: any) => {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-export default AuthProvider;
+export { DfxAuthProvider, useAuth };

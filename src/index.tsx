@@ -1,4 +1,5 @@
-export { UseFirebase } from './Hooks/firebase';
+import './index.css'
+export { DfxAuthProvider, useAuth } from './Providers/AuthProvider';
 export { DfxSignIn } from './components/DfxSignIn';
 export { DfxSignUp } from './components/DfxSignUp';
 export { DfxForgetPassword } from './components/DfxForgetPassword';
