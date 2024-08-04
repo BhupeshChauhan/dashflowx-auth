@@ -2,12 +2,13 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import BasicForgetPassword from './Varients/Basic';
+import { useAuth } from '@/Providers/AuthProvider';
 
 const loginSchema = z.object({
   email: z
     .string()
     .min(1, { message: 'Please enter a valid email' })
-    .email({ message: 'Not a valid email' })
+    .email({ message: 'Not a valid email' }),
 });
 
 interface iDfxForgetPassword {
@@ -17,7 +18,7 @@ interface iDfxForgetPassword {
   previewImg: string;
   previewTitle: string;
   PreviewDescription: string;
-  handleForgotPassword: (data: { email: string; }) => void;
+  handleForgotPassword: (data: { email: string }) => void;
   isLoading?: boolean;
   handleSignOn?: (data: any) => void;
   handleSignOnError?: (error: any) => void;
@@ -32,11 +33,11 @@ const DfxForgetPassword = ({
   previewImg,
   previewTitle,
   PreviewDescription,
-  handleForgotPassword,
   isLoading,
   varient = 'basic',
-  showSignIn = true
+  showSignIn = true,
 }: iDfxForgetPassword) => {
+  const { forgotPassword } = useAuth();
   const {
     register,
     handleSubmit,
@@ -48,7 +49,13 @@ const DfxForgetPassword = ({
     resolver: zodResolver(loginSchema),
   });
   const handleSubmitForm = (data: any) => {
-    handleForgotPassword({ email: data.email });
+    forgotPassword(data.email)
+      .then(() => {
+        console.log('Email sent successfully');
+      })
+      .catch((err: any) => {
+        console.log(err, 'Error sending email');
+      });
   };
 
   if (varient === 'basic') {

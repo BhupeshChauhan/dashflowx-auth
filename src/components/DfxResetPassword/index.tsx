@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import BasicForgetPassword from './Varients/Basic';
+import { useAuth } from '../../Providers/AuthProvider.tsx';
 
 const loginSchema = z.object({
   newpassword: z
@@ -21,15 +22,13 @@ interface iDfxResetPassword {
   previewImg: string;
   previewTitle: string;
   PreviewDescription: string;
-  handleResetPassword: (data: {
-    newpassword: string;
-    confirmpassword: string;
-  }) => void;
+  handleResetPassword: (data: { password: string }) => void;
   isLoading?: boolean;
   handleSignOn?: (data: any) => void;
   handleSignOnError?: (error: any) => void;
   varient: 'basic';
   showSignIn?: boolean;
+  oobCode: string; // This is the oobCode received from the email link.
 }
 
 const DfxResetPassword = ({
@@ -43,7 +42,9 @@ const DfxResetPassword = ({
   isLoading,
   varient = 'basic',
   showSignIn = true,
+  oobCode
 }: iDfxResetPassword) => {
+  const { resetPassword } = useAuth();
   const {
     register,
     handleSubmit,
@@ -56,10 +57,16 @@ const DfxResetPassword = ({
     resolver: zodResolver(loginSchema),
   });
   const handleSubmitForm = (data: any) => {
-    handleResetPassword({
-      newpassword: data.newpassword,
-      confirmpassword: data.confirmpassword,
-    });
+    resetPassword(oobCode, data.confirmpassword)
+      .then(() => {
+        handleResetPassword({
+          password: data.confirmpassword,
+        });
+        console.log('Password reset successfully');
+      })
+      .catch((err: any) => {
+        console.log(err, 'Error resetting password');
+      });
   };
 
   if (varient === 'basic') {

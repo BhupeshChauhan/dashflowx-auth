@@ -1,9 +1,8 @@
-import { ifirebaseConfig, UseFirebase } from '@/Hooks/firebase';
-import { signInWithPopup } from 'firebase/auth';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import BasicSignIn from './Varients/Basic';
+import { useAuth } from '@/Providers/AuthProvider';
 
 const loginSchema = z.object({
   email: z
@@ -24,7 +23,6 @@ interface iDfxSignIn {
   previewImg: string;
   previewTitle: string;
   PreviewDescription: string;
-  firebaseConfig?: ifirebaseConfig | null;
   handleSignIn: (data: { email: string; password: string }) => void;
   isLoading?: boolean;
   handleSignOn?: (data: any) => void;
@@ -42,16 +40,15 @@ const DfxSignIn = ({
   previewImg,
   previewTitle,
   PreviewDescription,
-  firebaseConfig,
   handleSignIn,
   isLoading,
   handleSignOn,
   handleSignOnError,
   logoUrl,
   varient = 'basic',
-  showSignUp = true
+  showSignUp = true,
 }: iDfxSignIn) => {
-  const { auth, provider }: any = UseFirebase(firebaseConfig || null);
+  const { login, signInWithGoogle } = useAuth();
   const {
     register,
     handleSubmit,
@@ -64,18 +61,21 @@ const DfxSignIn = ({
     resolver: zodResolver(loginSchema),
   });
   const handleSubmitForm = (data: any) => {
-    handleSignIn({ email: data.email, password: data.password });
+    login(data.email, data.password)
+      .then(() => {
+        handleSignIn({ email: data.email, password: data.password });
+        console.log('Password reset successfully');
+      })
+      .catch((err: any) => {
+        console.log(err, 'Error resetting password');
+      });
   };
 
   const handleSubmitOn = (type: string) => {
-    if (firebaseConfig && type === 'google') {
-      signInWithPopup(auth, provider)
-        .then((result) => {
-          handleSignOn && handleSignOn(result);
-        })
-        .catch((error) => {
-          handleSignOnError && handleSignOnError(error);
-        });
+    if (type === 'google') {
+      signInWithGoogle()
+        .then((user: any) => handleSignOn && handleSignOn(user))
+        .catch((error: any) => handleSignOnError && handleSignOnError(error));
     }
   };
 
@@ -83,7 +83,6 @@ const DfxSignIn = ({
     return (
       <BasicSignIn
         logoUrl={logoUrl}
-        firebaseConfig={firebaseConfig}
         handleSubmitOn={handleSubmitOn}
         handleSubmit={handleSubmit}
         handleSubmitForm={handleSubmitForm}

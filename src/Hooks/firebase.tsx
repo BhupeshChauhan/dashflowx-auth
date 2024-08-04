@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 
 export interface ifirebaseConfig {
   apiKey: string;
@@ -15,6 +15,5 @@ export const UseFirebase = (firebaseConfig: ifirebaseConfig | null) => {
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app)
-  const provider = new GoogleAuthProvider()
-  return { app, auth, provider };
+  return { app, auth };
 };

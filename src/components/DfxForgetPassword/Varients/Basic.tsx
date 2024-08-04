@@ -31,7 +31,7 @@ const BasicForgetPassword = ({
   showSignIn,
 }: iBasicForgetPassword) => {
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap w-screen h-screen">
       <div className="flex w-full flex-col md:w-[40%]">
         <div className="h-full flex items-center justify-center">
           <div className="mx-auto max-w-md">
@@ -87,7 +87,7 @@ const BasicForgetPassword = ({
                         className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent py-3 px-4 text-sm font-semibold text-white transition-all focus:outline-none focus:ring-2"
                         disabled={isLoading}
                       >
-                        Reset password
+                        Forget password?
                       </Button>
                     </div>
                   </form>

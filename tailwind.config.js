@@ -1,12 +1,20 @@
-/** @type {import('tailwindcss').Config} */
-export default {
+const config = {
   darkMode: ['class'],
-  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    './node_modules/@dashflowx/core/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@dashflowx/ui/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@dashflowx/datagrid/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@dashflowx/auth/**/*.{js,ts,jsx,tsx}',
+  ],
   theme: {
     extend: {
       background: 'hsl(var(--color-background))',
       colors: {
         primary: {
+          DEFAULT: '#2561a2',
           light: '#2561a2',
           dark: '#a3d1ff',
         },
@@ -36,3 +44,4 @@ export default {
   },
   plugins: [],
 };
+export default config;
