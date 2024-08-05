@@ -24,8 +24,6 @@ interface iDfxResetPassword {
   PreviewDescription: string;
   handleResetPassword: (data: { password: string }) => void;
   isLoading?: boolean;
-  handleSignOn?: (data: any) => void;
-  handleSignOnError?: (error: any) => void;
   varient: 'basic';
   showSignIn?: boolean;
   oobCode: string; // This is the oobCode received from the email link.

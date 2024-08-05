@@ -16,6 +16,9 @@ const DfxAuthEmail = ({
   showSignIn = true,
   oobCode,
   email,
+  handleEmailVerified,
+  handleEmailVerificationError,
+  continueUrl,
 }: any) => {
   if (mode === 'resetPassword') {
     return (
@@ -39,8 +42,15 @@ const DfxAuthEmail = ({
     return <DfxRecoverEmail />;
   }
   if (mode === 'verifyEmail') {
-    return <DfxVerifyEmail />;
+    return (
+      <DfxVerifyEmail
+        oobCode={oobCode}
+        handleEmailVerified={handleEmailVerified}
+        handleEmailVerificationError={handleEmailVerificationError}
+        continueUrl={continueUrl}
+      />
+    );
   }
 };
 
-export default DfxAuthEmail;
+export { DfxAuthEmail };
