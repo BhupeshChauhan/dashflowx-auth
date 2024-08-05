@@ -27,9 +27,6 @@ export const Basic: Story = {
       console.log(data);
     },
     isLoading: false,
-    handleSignOn: () => {},
-    handleSignOnError: () => {},
-    // logoUrl: '/DashflowLogo.png',
     varient: 'basic',
     showSignIn: true,
   },
