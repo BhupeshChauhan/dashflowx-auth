@@ -3,25 +3,30 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { UseFirebase } from '@/Hooks/firebase';
 import {
+  applyActionCode,
   confirmPasswordReset,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   onAuthStateChanged,
+  sendEmailVerification,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updatePassword,
 } from 'firebase/auth';
 
 interface AuthContextType {
   currentUser: string | null;
   signInWithGoogle: () => any;
   login: (email: any, password: any) => any;
-  signUp: (email: any, password: any) => any;
+  signUp: (email: any, password: any, continueUrl: any) => any;
   logout: () => any;
   resetPassword: (oobCode: any, newPassword: any) => any;
-  forgotPassword: (email: string) => any;
-  // Add other functions and properties here
+  forgotPassword: (email: string, continueUrl: any) => any;
+  inviteUser: (email: any, password: any, continueUrl: any) => any;
+  changePassword: (newPassword: any) => any;
+  handleVerifyEmail: (actionCode: any) => any;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -32,11 +37,14 @@ const AuthContext = createContext<AuthContextType>({
   logout: () => Promise,
   forgotPassword: () => Promise,
   resetPassword: () => Promise,
+  inviteUser: () => Promise,
+  changePassword: () => Promise,
+  handleVerifyEmail: () => Promise,
 });
 
 const useAuth = () => useContext(AuthContext);
 
-const DfxAuthProvider = ({ children, firebaseConfig, logInUrl }: any) => {
+const DfxAuthProvider = ({ children, firebaseConfig }: any) => {
   const { auth } = UseFirebase(firebaseConfig || null);
   const [currentUser, setCurrentUser] = useState<any>(null);
 
@@ -49,21 +57,58 @@ const DfxAuthProvider = ({ children, firebaseConfig, logInUrl }: any) => {
     return signInWithEmailAndPassword(auth, email, password);
   }
 
-  function signUp(email: any, password: any) {
+  function inviteUser(email: any, password: any, continueUrl: any) {
     if (!auth) return;
-    return createUserWithEmailAndPassword(auth, email, password);
+    return createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // send verification mail.
+        sendEmailVerification(userCredential.user, {
+          url: continueUrl,
+        });
+        auth.signOut();
+        console.log('email send', email);
+      })
+      .catch((error) => {
+        console.error('Error creating user:', error);
+      });
   }
 
-  function forgotPassword(email: any) {
+  function handleVerifyEmail(actionCode: any) {
+    if (!auth) return;
+    return applyActionCode(auth, actionCode);
+  }
+
+  function signUp(email: any, password: any, continueUrl: any) {
+    if (!auth) return;
+    return createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // send verification mail.
+        sendEmailVerification(userCredential.user, {
+          url: continueUrl,
+        });
+        auth.signOut();
+        console.log('email send', email);
+      })
+      .catch((error) => {
+        console.error('Error creating user:', error);
+      });
+  }
+
+  function forgotPassword(email: any, continueUrl: any) {
     if (!auth) return;
     return sendPasswordResetEmail(auth, email, {
-      url: logInUrl,
+      url: continueUrl,
     });
   }
 
   function resetPassword(oobCode: any, newPassword: any) {
     if (!auth) return;
     return confirmPasswordReset(auth, oobCode, newPassword);
+  }
+
+  function changePassword(newPassword: any) {
+    if (!auth?.currentUser) return;
+    return updatePassword(auth.currentUser, newPassword);
   }
 
   function logout() {
@@ -97,6 +142,9 @@ const DfxAuthProvider = ({ children, firebaseConfig, logInUrl }: any) => {
     logout,
     forgotPassword,
     resetPassword,
+    inviteUser,
+    handleVerifyEmail,
+    changePassword,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -64,10 +64,10 @@ const DfxSignIn = ({
     login(data.email, data.password)
       .then(() => {
         handleSignIn({ email: data.email, password: data.password });
-        console.log('Password reset successfully');
+        console.log('Sign In Success');
       })
       .catch((err: any) => {
-        console.log(err, 'Error resetting password');
+        console.log('Error: ' + err);
       });
   };
 

@@ -16,7 +16,7 @@ interface iBasicSignIn {
   handleSubmitOn: (type: string) => void;
   handleSubmit: any;
   handleSubmitForm: (data: any) => void;
-  showSignUp: boolean
+  showSignUp: boolean;
   showSignOn?: boolean;
 }
 const BasicSignIn = ({
@@ -35,7 +35,7 @@ const BasicSignIn = ({
   previewTitle,
   previewImg,
   showSignUp,
-  showSignOn = true
+  showSignOn = true,
 }: iBasicSignIn) => {
   return (
     <div className="flex flex-wrap w-screen h-screen">
@@ -123,24 +123,24 @@ const BasicSignIn = ({
               </div>
             </div>
             <div>
-            {library === 'react' && (
-              <TypographyComp
-                as={type}
-                to={forgetPasswordUrl}
-                className="text-primary-600 text-sm dark:text-primary-500 font-thin hover:underline"
-              >
-                Forget Password?
-              </TypographyComp>
-            )}
-            {library === 'next' && (
-              <TypographyComp
-                as={type}
-                href={forgetPasswordUrl}
-                className="text-primary-600 text-sm dark:text-primary-500 font-thin hover:underline"
-              >
-                Forget Password?
-              </TypographyComp>
-            )}
+              {library === 'react' && (
+                <TypographyComp
+                  as={type}
+                  to={forgetPasswordUrl}
+                  className="text-primary-600 text-sm dark:text-primary-500 font-thin hover:underline"
+                >
+                  Forget Password?
+                </TypographyComp>
+              )}
+              {library === 'next' && (
+                <TypographyComp
+                  as={type}
+                  href={forgetPasswordUrl}
+                  className="text-primary-600 text-sm dark:text-primary-500 font-thin hover:underline"
+                >
+                  Forget Password?
+                </TypographyComp>
+              )}
             </div>
           </div>
           {showSignUp && (

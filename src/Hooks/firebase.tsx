@@ -14,6 +14,6 @@ export const UseFirebase = (firebaseConfig: ifirebaseConfig | null) => {
   if (!firebaseConfig) return { app: null, auth: null, provider: null };
 
   const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app)
+  const auth = getAuth(app);
   return { app, auth };
 };

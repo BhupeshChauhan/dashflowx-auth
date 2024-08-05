@@ -69,4 +69,5 @@ If you need help or have any questions, feel free to reach out:
 - **Email**: Contact us at support@example.com.
 
 # Acknowledgements
+
 We would like to thank the open-source community for their contributions and support in making Dashflow-X a reality.

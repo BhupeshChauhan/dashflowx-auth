@@ -37,6 +37,7 @@ interface iDfxSignUp {
   logoUrl: string;
   varient: 'basic';
   showSignIn?: boolean;
+  continueUrl: string;
 }
 
 const DfxSignUp = ({
@@ -53,6 +54,7 @@ const DfxSignUp = ({
   logoUrl,
   varient = 'basic',
   showSignIn = true,
+  continueUrl,
 }: iDfxSignUp) => {
   const { signUp, signInWithGoogle } = useAuth();
   const {
@@ -68,17 +70,17 @@ const DfxSignUp = ({
     resolver: zodResolver(loginSchema),
   });
   const handleSubmitForm = (data: any) => {
-    signUp(data.email, data.password)
+    signUp(data.email, data.password, continueUrl)
       .then(() => {
         handleSignUp({
           username: data.username,
           email: data.email,
           password: data.password,
         });
-        console.log('Password reset successfully');
+        console.log('Signup successfully');
       })
       .catch((err: any) => {
-        console.log(err, 'Error resetting password');
+        console.log(err, 'Error signing up');
       });
   };
 

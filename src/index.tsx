@@ -1,4 +1,4 @@
-import './index.css'
+import './index.css';
 export { DfxAuthProvider, useAuth } from './Providers/AuthProvider';
 export { DfxSignIn } from './components/DfxSignIn';
 export { DfxSignUp } from './components/DfxSignUp';

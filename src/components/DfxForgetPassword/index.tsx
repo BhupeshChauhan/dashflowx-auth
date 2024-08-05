@@ -24,6 +24,7 @@ interface iDfxForgetPassword {
   handleSignOnError?: (error: any) => void;
   varient: 'basic';
   showSignIn?: boolean;
+  continueUrl: string; // This is the url to redirect the user to after signing in.
 }
 
 const DfxForgetPassword = ({
@@ -36,6 +37,7 @@ const DfxForgetPassword = ({
   isLoading,
   varient = 'basic',
   showSignIn = true,
+  continueUrl,
 }: iDfxForgetPassword) => {
   const { forgotPassword } = useAuth();
   const {
@@ -49,7 +51,7 @@ const DfxForgetPassword = ({
     resolver: zodResolver(loginSchema),
   });
   const handleSubmitForm = (data: any) => {
-    forgotPassword(data.email)
+    forgotPassword(data.email, continueUrl)
       .then(() => {
         console.log('Email sent successfully');
       })
