@@ -38,6 +38,7 @@ interface iDfxSignUp {
   varient: 'basic';
   showSignIn?: boolean;
   continueUrl: string;
+  showSignOn?: boolean;
 }
 
 const DfxSignUp = ({
@@ -55,6 +56,7 @@ const DfxSignUp = ({
   varient = 'basic',
   showSignIn = true,
   continueUrl,
+  showSignOn
 }: iDfxSignUp) => {
   const { signUp, signInWithGoogle } = useAuth();
   const {
@@ -109,6 +111,7 @@ const DfxSignUp = ({
         previewTitle={previewTitle}
         previewImg={previewImg}
         showSignIn={showSignIn}
+        showSignOn={showSignOn}
       />
     );
   }

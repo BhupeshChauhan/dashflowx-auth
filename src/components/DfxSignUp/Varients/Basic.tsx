@@ -1,4 +1,3 @@
-import { ifirebaseConfig } from '@/Hooks/firebase';
 import { Button, Input2, TypographyComp } from '@dashflowx/core';
 import { FcGoogle } from 'react-icons/fc';
 
@@ -9,7 +8,6 @@ interface iBasicSignUp {
   previewImg: string;
   previewTitle: string;
   PreviewDescription: string;
-  firebaseConfig?: ifirebaseConfig | null;
   isLoading?: boolean;
   logoUrl: string;
   register: any;
@@ -18,10 +16,10 @@ interface iBasicSignUp {
   handleSubmit: any;
   handleSubmitForm: (data: any) => void;
   showSignIn: boolean;
+  showSignOn?: boolean;
 }
 const BasicSignUp = ({
   logoUrl,
-  firebaseConfig,
   handleSubmitOn,
   handleSubmit,
   handleSubmitForm,
@@ -35,6 +33,7 @@ const BasicSignUp = ({
   previewTitle,
   previewImg,
   showSignIn,
+  showSignOn
 }: iBasicSignUp) => {
   return (
     <div className="flex flex-wrap w-screen h-screen">
@@ -46,7 +45,7 @@ const BasicSignUp = ({
           >
             <img className={'w-auto h-10'} src={logoUrl} alt="" />
           </a>
-          {firebaseConfig && (
+          {showSignOn && (
             <>
               <p className="text-left text-3xl font-bold">
                 Sign in to your account
