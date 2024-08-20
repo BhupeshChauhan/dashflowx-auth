@@ -48,14 +48,14 @@ const BasicSignUp = ({
           {showSignOn && (
             <>
               <p className="text-left text-3xl font-bold">
-                Sign in to your account
+                Create a new account
               </p>
               <button
                 className="-2 mt-8 flex items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition focus:ring-2 hover:border-transparent hover:bg-black hover:text-white"
                 onClick={() => handleSubmitOn('google')}
               >
-                <FcGoogle />
-                Log in with Google
+                <FcGoogle className='mr-2'/>
+                Sign Up with Google
               </button>
               <div className="relative mt-8 flex h-px place-items-center bg-gray-200">
                 <div className="absolute left-1/2 h-6 w-14 -translate-x-1/2 bg-white text-center text-sm text-gray-500">
@@ -73,7 +73,7 @@ const BasicSignUp = ({
                 type="username"
                 id="login-username"
                 className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
-                placeholder="Username"
+                placeholder="First and Last Name"
                 fullwidth={true}
                 {...register('username', { required: true })}
                 errorMsg={errors.username?.message}

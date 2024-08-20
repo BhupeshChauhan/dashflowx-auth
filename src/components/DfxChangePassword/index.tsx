@@ -25,8 +25,7 @@ interface iDfxChangePassword {
   handleChangePassword: (data: { password: string }) => void;
   isLoading?: boolean;
   varient: 'basic';
-  showSignIn?: boolean;
-  email: string;
+  showSignIn?: boolean; 
 }
 
 const DfxChangePassword = ({

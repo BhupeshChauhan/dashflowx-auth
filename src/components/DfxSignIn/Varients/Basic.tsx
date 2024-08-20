@@ -56,7 +56,7 @@ const BasicSignIn = ({
                 className="-2 mt-8 flex items-center justify-center rounded-md border px-4 py-1 outline-none ring-gray-400 ring-offset-2 transition focus:ring-2 hover:border-transparent hover:bg-black hover:text-white"
                 onClick={() => handleSubmitOn('google')}
               >
-                <FcGoogle />
+                <FcGoogle className='mr-2' />
                 Log in with Google
               </button>
               <div className="relative mt-8 flex h-px place-items-center bg-gray-200">
