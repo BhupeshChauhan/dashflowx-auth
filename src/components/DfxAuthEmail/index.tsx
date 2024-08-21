@@ -3,7 +3,7 @@ import { DfxResetPassword } from '../DfxResetPassword';
 import DfxVerifyEmail from '../DfxVerifyEmail';
 
 interface iDfxAuthEmail {
-  mode: 'resetPassword' | 'recoverEmail' | 'verifyEmail';
+  mode: string;
   library: 'react' | 'next';
   type: any;
   redirectSignInUrl: string;
