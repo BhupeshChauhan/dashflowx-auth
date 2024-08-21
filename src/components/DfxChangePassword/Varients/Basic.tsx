@@ -1,14 +1,9 @@
-import { ifirebaseConfig } from '@/Hooks/firebase';
 import { Button, Input2, TypographyComp } from '@dashflowx/core';
 
 interface iBasicChangePassword {
   library: 'react' | 'next';
   type: any;
   redirectSignInUrl: string;
-  previewImg: string;
-  previewTitle: string;
-  PreviewDescription: string;
-  firebaseConfig?: ifirebaseConfig | null;
   isLoading?: boolean;
   register: any;
   errors: any;
@@ -25,13 +20,10 @@ const BasicChangePassword = ({
   library,
   type,
   redirectSignInUrl,
-  PreviewDescription,
-  previewTitle,
-  previewImg,
   showSignIn,
 }: iBasicChangePassword) => {
   return (
-    <div className="flex flex-wrap w-screen h-screen">
+    <div className="flex flex-wrap w-full h-full">
       <div className="flex w-full flex-col md:w-[40%]">
         <div className="h-full flex items-center justify-center z-10">
           <div className="mx-auto max-w-md w-[80%]">
@@ -127,18 +119,6 @@ const BasicChangePassword = ({
             )}
           </div>
         </div>
-      </div>
-      <div className="pointer-events-none relative hidden h-screen select-none bg-black md:block md:w-[60%]">
-        <div className="absolute bottom-0 z-10 px-8 text-white opacity-100">
-          <p className="mb-8 text-3xl font-semibold leading-10">
-            {PreviewDescription}
-          </p>
-          <p className="mb-7 text-sm opacity-70">{previewTitle}</p>
-        </div>
-        <img
-          className="-z-1 absolute top-0 h-full w-full object-cover opacity-90"
-          src={previewImg}
-        />
       </div>
     </div>
   );

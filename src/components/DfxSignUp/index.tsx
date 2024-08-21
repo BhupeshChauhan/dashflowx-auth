@@ -56,7 +56,7 @@ const DfxSignUp = ({
   varient = 'basic',
   showSignIn = true,
   continueUrl,
-  showSignOn
+  showSignOn,
 }: iDfxSignUp) => {
   const { signUp, signInWithGoogle } = useAuth();
   const {

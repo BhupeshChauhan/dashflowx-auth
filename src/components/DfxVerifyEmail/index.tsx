@@ -4,26 +4,22 @@ import { useEffect } from 'react';
 
 interface iDfxVerifyEmail {
   oobCode: string;
-  handleEmailVerified: (continueUrl: string) => void;
-  handleEmailVerificationError?: () => void;
-  continueUrl: string; // The URL to redirect to after email verification.
+  handleEmailVerified?: () => void;
+  handleEmailVerificationError?: (err: any) => void;
 }
 const DfxVerifyEmail = ({
   oobCode,
   handleEmailVerified,
   handleEmailVerificationError,
-  continueUrl,
 }: iDfxVerifyEmail) => {
   const { handleVerifyEmail } = useAuth();
   useEffect(() => {
     handleVerifyEmail(oobCode)
       .then(() => {
-        handleEmailVerified(continueUrl);
-        console.log('Email verified successfully');
+        handleEmailVerified && handleEmailVerified();
       })
       .catch((err: any) => {
-        console.log(err, 'Error verifying email');
-        handleEmailVerificationError && handleEmailVerificationError();
+        handleEmailVerificationError && handleEmailVerificationError(err);
       });
   }, []);
 

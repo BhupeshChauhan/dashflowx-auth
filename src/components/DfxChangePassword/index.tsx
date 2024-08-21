@@ -19,22 +19,16 @@ interface iDfxChangePassword {
   library: 'react' | 'next';
   type: any;
   redirectSignInUrl: string;
-  previewImg: string;
-  previewTitle: string;
-  PreviewDescription: string;
   handleChangePassword: (data: { password: string }) => void;
   isLoading?: boolean;
   varient: 'basic';
-  showSignIn?: boolean; 
+  showSignIn?: boolean;
 }
 
 const DfxChangePassword = ({
   library,
   type,
   redirectSignInUrl,
-  previewImg,
-  previewTitle,
-  PreviewDescription,
   handleChangePassword,
   isLoading,
   varient = 'basic',
@@ -76,9 +70,6 @@ const DfxChangePassword = ({
         library={library}
         type={type}
         redirectSignInUrl={redirectSignInUrl}
-        PreviewDescription={PreviewDescription}
-        previewTitle={previewTitle}
-        previewImg={previewImg}
         showSignIn={showSignIn}
       />
     );

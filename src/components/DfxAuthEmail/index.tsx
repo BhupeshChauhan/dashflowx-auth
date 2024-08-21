@@ -2,6 +2,23 @@ import DfxRecoverEmail from '../DfxRecoverEmail';
 import { DfxResetPassword } from '../DfxResetPassword';
 import DfxVerifyEmail from '../DfxVerifyEmail';
 
+interface iDfxAuthEmail {
+  mode: 'resetPassword' | 'recoverEmail' | 'verifyEmail';
+  library: 'react' | 'next';
+  type: any;
+  redirectSignInUrl: string;
+  previewImg: string;
+  previewTitle: string;
+  PreviewDescription: string;
+  handleResetPassword: (data: any) => void;
+  isLoading?: boolean;
+  varient: 'basic';
+  showSignIn?: boolean;
+  oobCode: string;
+  email?: string;
+  handleEmailVerified?: () => void;
+  handleEmailVerificationError?: (err: any) => void;
+}
 const DfxAuthEmail = ({
   mode,
   library,
@@ -15,11 +32,9 @@ const DfxAuthEmail = ({
   varient = 'basic',
   showSignIn = true,
   oobCode,
-  email,
   handleEmailVerified,
   handleEmailVerificationError,
-  continueUrl,
-}: any) => {
+}: iDfxAuthEmail) => {
   if (mode === 'resetPassword') {
     return (
       <DfxResetPassword
@@ -34,7 +49,6 @@ const DfxAuthEmail = ({
         isLoading={isLoading}
         varient={varient}
         showSignIn={showSignIn}
-        email={email}
       />
     );
   }
@@ -47,7 +61,6 @@ const DfxAuthEmail = ({
         oobCode={oobCode}
         handleEmailVerified={handleEmailVerified}
         handleEmailVerificationError={handleEmailVerificationError}
-        continueUrl={continueUrl}
       />
     );
   }

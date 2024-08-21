@@ -27,7 +27,6 @@ interface iDfxResetPassword {
   varient: 'basic';
   showSignIn?: boolean;
   oobCode: string; // This is the oobCode received from the email link.
-  email: string;
 }
 
 const DfxResetPassword = ({
@@ -42,9 +41,8 @@ const DfxResetPassword = ({
   varient = 'basic',
   showSignIn = true,
   oobCode,
-  email,
 }: iDfxResetPassword) => {
-  const { resetPassword, login } = useAuth();
+  const { resetPassword } = useAuth();
   const {
     register,
     handleSubmit,
@@ -59,11 +57,9 @@ const DfxResetPassword = ({
   const handleSubmitForm = (data: any) => {
     resetPassword(oobCode, data.confirmpassword)
       .then(() => {
-        login(email, data.confirmpassword);
         handleResetPassword({
           password: data.confirmpassword,
         });
-        console.log('Password reset successfully');
       })
       .catch((err: any) => {
         console.log(err, 'Error resetting password');
