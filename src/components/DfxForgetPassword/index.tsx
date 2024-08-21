@@ -18,10 +18,7 @@ interface iDfxForgetPassword {
   previewImg: string;
   previewTitle: string;
   PreviewDescription: string;
-  handleForgotPassword: (data: { email: string }) => void;
   isLoading?: boolean;
-  handleSignOn?: (data: any) => void;
-  handleSignOnError?: (error: any) => void;
   varient: 'basic';
   showSignIn?: boolean;
   continueUrl: string; // This is the url to redirect the user to after signing in.
