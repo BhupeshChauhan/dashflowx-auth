@@ -24,9 +24,9 @@ const BasicChangePassword = ({
 }: iBasicChangePassword) => {
   return (
     <div className="flex flex-wrap w-full h-full">
-      <div className="flex w-full flex-col md:w-[40%]">
+      <div className="flex w-full flex-col">
         <div className="h-full flex items-center justify-center z-10">
-          <div className="mx-auto max-w-md w-[80%]">
+          <div className="mx-auto">
             <div className="rounded-xl bg-white">
               <div className="p-4 sm:p-7">
                 <div className="text-center">
