@@ -15,6 +15,7 @@ import {
   signOut,
   updatePassword,
 } from 'firebase/auth';
+import { ErrorPopUp } from '@/lib';
 
 interface AuthContextType {
   currentUser: string | null;
@@ -85,9 +86,11 @@ const DfxAuthProvider = ({ children, firebaseConfig }: any) => {
         // send verification mail.
         sendEmailVerification(userCredential.user, {
           url: continueUrl,
+        }).then(()=>{
+          auth.signOut();
+        }).catch((error) => {
+          ErrorPopUp(error.message)
         });
-        auth.signOut();
-        console.log('email send', email);
       })
       .catch((error) => {
         console.error('Error creating user:', error);
