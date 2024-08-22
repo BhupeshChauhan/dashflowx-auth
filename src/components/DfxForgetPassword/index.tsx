@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import BasicForgetPassword from './Varients/Basic';
 import { useAuth } from '@/Providers/AuthProvider';
+import { ErrorPopUp, InfoPopUp } from '@/lib';
 
 const loginSchema = z.object({
   email: z
@@ -22,6 +23,7 @@ interface iDfxForgetPassword {
   varient: 'basic';
   showSignIn?: boolean;
   continueUrl: string; // This is the url to redirect the user to after signing in.
+  handleForgetPassword?: () => void;
 }
 
 const DfxForgetPassword = ({
@@ -35,6 +37,7 @@ const DfxForgetPassword = ({
   varient = 'basic',
   showSignIn = true,
   continueUrl,
+  handleForgetPassword
 }: iDfxForgetPassword) => {
   const { forgotPassword } = useAuth();
   const {
@@ -51,9 +54,12 @@ const DfxForgetPassword = ({
     forgotPassword(data.email, continueUrl)
       .then(() => {
         console.log('Email sent successfully');
+        InfoPopUp('Email sent successfully')
+        handleForgetPassword && handleForgetPassword();
       })
       .catch((err: any) => {
         console.log(err, 'Error sending email');
+        ErrorPopUp(err.message)
       });
   };
 
