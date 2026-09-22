@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import BasicSignIn from './Varients/Basic';
-import { useAuth } from '@/Providers/AuthProvider';
+import { useAuth } from '@/free/AuthProvider';
 
 const loginSchema = z.object({
   email: z
@@ -30,6 +30,7 @@ interface iDfxSignIn {
   logoUrl: string;
   varient: 'basic';
   showSignUp?: boolean;
+  showSignOn?: boolean;
 }
 
 const DfxSignIn = ({
@@ -47,6 +48,7 @@ const DfxSignIn = ({
   logoUrl,
   varient = 'basic',
   showSignUp = true,
+  showSignOn = true,
 }: iDfxSignIn) => {
   const { login, signInWithGoogle } = useAuth();
   const {
@@ -97,6 +99,7 @@ const DfxSignIn = ({
         previewTitle={previewTitle}
         previewImg={previewImg}
         showSignUp={showSignUp}
+        showSignOn={showSignOn}
       />
     );
   }

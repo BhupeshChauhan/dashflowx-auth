@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useAuth } from '@/Providers/AuthProvider';
+import { useAuth } from '@/free/AuthProvider';
 import { useEffect } from 'react';
 
 interface iDfxVerifyEmail {

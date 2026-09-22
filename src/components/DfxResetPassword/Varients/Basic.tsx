@@ -86,8 +86,7 @@ const BasicForgetPassword = ({
                         />
                       </div>
                       <Button
-                        variant="solid"
-                        color="primary"
+                        variant="primary"
                         type="submit"
                         fullwidth={true}
                         className="inline-flex items-center justify-center gap-2 rounded-md border border-transparent py-3 px-4 text-sm font-semibold text-white transition-all focus:outline-none focus:ring-2"

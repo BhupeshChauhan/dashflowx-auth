@@ -1,11 +1,16 @@
 {
   "name": "@dashflowx/auth",
   "version": "0.0.27",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dashflowx/dashflowx-auth.git"
+  },
   "type": "module",
   "files": [
     "dist"
   ],
-  "main": "dist/index.umd.cjs",
+  "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
   "exports": {
     ".": {
@@ -14,11 +19,16 @@
     }
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
   "scripts": {
-    "build": "tsc && vite build",
-    "storybook": "storybook dev -p 6006",
+    "build": "node scripts/ensure-core.mjs && vite build && vite build --config vite.pro.config.ts",
+    "build:pro": "vite build --config vite.pro.config.ts",
+    "test": "vitest run && node scripts/check-no-firebase.mjs && node scripts/check-pro-boundary.mjs && node scripts/check-registry.mjs",
+    "pack:inspect": "yarn build && node scripts/pack-inspect.mjs . && node scripts/pack-inspect.mjs auth-pro",
+    "lint": "eslint src --ext ts,tsx --max-warnings 0",
+    "storybook": "storybook dev -p 6009",
     "build-storybook": "storybook build",
     "prepack": "npm run build",
     "commit": "yarn git-cz",
@@ -26,7 +36,6 @@
     "format:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
-    "@dashflowx/core": "^2.0.21",
     "@hookform/resolvers": "^3.9.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
@@ -50,6 +59,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@dashflowx/core": "file:../dashflowx-core",
     "@chromatic-com/storybook": "^1.2.18",
     "@storybook/addon-essentials": "^8.0.0",
     "@storybook/addon-interactions": "^8.0.0",
@@ -59,6 +69,10 @@
     "@storybook/react": "^8.0.0",
     "@storybook/react-vite": "^8.0.0",
     "@storybook/test": "^8.0.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/user-event": "^14.5.2",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^7.1.1",
@@ -83,7 +97,14 @@
     "typescript": "^5.2.2",
     "vite": "^5.1.6",
     "vite-plugin-dts": "^3.7.3",
-    "vite-tsconfig-paths": "^4.3.1"
+    "vite-tsconfig-paths": "^4.3.1",
+    "vitest": "^2.1.0",
+    "jsdom": "^24.1.0"
+  },
+  "peerDependencies": {
+    "@dashflowx/core": ">=3.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "config": {
     "commitizen": {

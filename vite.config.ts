@@ -17,14 +17,15 @@ export default defineConfig({
       fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: ['react', 'react-dom', '@dashflowx/core', 'firebase', 'firebase/app', 'firebase/auth'],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
+          '@dashflowx/core': 'dashflowx',
         },
       },
     },
   },
-  plugins: [react(), dts({ rollupTypes: true })],
+  plugins: [react(), dts({ skipDiagnostics: true })],
 });

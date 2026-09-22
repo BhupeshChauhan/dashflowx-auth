@@ -102,8 +102,7 @@ const BasicSignUp = ({
               />
             </div>
             <Button
-              variant="solid"
-              color="primary"
+              variant="primary"
               type="submit"
               className="w-full rounded-lg px-4 py-2 text-center text-base font-semibold shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2"
               fullwidth={true}

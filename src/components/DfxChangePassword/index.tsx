@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useAuth } from '../../Providers/AuthProvider.tsx';
+import { useAuth } from '@/free/AuthProvider';
 import BasicChangePassword from './Varients/Basic.tsx';
 
 const loginSchema = z.object({

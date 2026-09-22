@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import BasicForgetPassword from './Varients/Basic';
-import { useAuth } from '@/Providers/AuthProvider';
+import { useAuth } from '@/free/AuthProvider';
 import { ErrorPopUp, InfoPopUp } from '@/lib';
 
 const loginSchema = z.object({
